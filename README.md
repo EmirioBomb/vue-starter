@@ -10,3 +10,4 @@
 - [v-text&v-html](https://emiriobomb.github.io/vue-starter/02.BasicDirectives/v-text.html)
 - [v-for](https://emiriobomb.github.io/vue-starter/02.BasicDirectives/v-for.html)
 - [v-bind](https://emiriobomb.github.io/vue-starter/02.BasicDirectives/v-bind.html)
+- [v-on](https://emiriobomb.github.io/vue-starter/02.BasicDirectives/v-on.html)

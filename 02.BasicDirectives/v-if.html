@@ -7,11 +7,13 @@
     <title>v-if</title>
 </head>
 <body>
-    <div class="desc" id="define">
-        <h2>Usage: </h2>
+    <h2>v-if</h2>
+    <ul>
+        <li>Usages:</li>
         <p>Conditionally render the element based on the truthy-ness of the expression value. The element and its contained directives / components are destroyed and re-constructed during toggles. If the element is a <code style="color:red">&lt;template&gt;</code> element, its content will be extracted as the conditional block.</p>
-        <hr>
-    </div>
+    </ul>
+    <hr>
+    
     <div class="demo" id="app">
         <h1>v-if:</h1>
         <p v-if="isShow">{{message}}</p>
