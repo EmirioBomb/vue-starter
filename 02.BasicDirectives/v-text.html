@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>v-text</title>
+</head>
+<body>
+    <h2>Usage:</h2>
+    <p><h4><span style="color: red">v-text: </span></h4>Updates the element’s textContent. If you need to update the part of textContent, you should use {{ Mustache }} interpolations.</p>
+    <p><h4><span style="color: red">v-html: </span></h4>Updates the element’s innerHTML. Note that the contents are inserted as plain HTML - they will not be compiled as Vue templates. If you find yourself trying to compose templates using v-html, try to rethink the solution by using components instead.</p>
+    <hr>
+
+    <div class="demo" id="app">
+        <h1 v-text="message">{{message}}</h1>
+        <hr>
+        <h1 v-html="msg">{{msg}}</h1>
+        <hr>
+    </div>
+</body>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: '<h1>This is v-text format string</h1>',
+            msg: '<h1>This is v-html format string</h1>'
+        }
+    })
+</script>
+</html>
