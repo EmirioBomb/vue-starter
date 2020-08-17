@@ -6,3 +6,4 @@
 
 ### Basic Directives
 - [v-if](https://emiriobomb.github.io/vue-starter/02.BasicDirectives/v-if.html)
+- [v-show](https://emiriobomb.github.io/vue-starter/02.BasicDirectives/v-show.html)
