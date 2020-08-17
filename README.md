@@ -9,3 +9,4 @@
 - [v-show](https://emiriobomb.github.io/vue-starter/02.BasicDirectives/v-show.html)
 - [v-text&v-html](https://emiriobomb.github.io/vue-starter/02.BasicDirectives/v-text.html)
 - [v-for](https://emiriobomb.github.io/vue-starter/02.BasicDirectives/v-for.html)
+- [v-bind](https://emiriobomb.github.io/vue-starter/02.BasicDirectives/v-bind.html)
