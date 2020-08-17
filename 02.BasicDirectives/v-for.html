@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>v-for</title>
+
+    <style>
+        table {
+            text-align: left;
+        }
+
+        table, td, th {
+            padding: 5px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo" id="app">
+        <h1>v-for</h1>
+        <ul>
+            <li>Expects: Array | Object | number | string | Iterable (since 2.6)</li>
+            <li>Usages: </li>
+            <p>Render the element or template block multiple times based on the source data. The directive’s value must use the special syntax alias in expression to provide an alias for the current element being iterated on</p>
+        </ul>
+        <hr>
+
+        <h2>Object</h2>
+        <h3>Object: {{object}}</h3>
+        <ul>
+            <li v-for="(item, index) in object">{{index}}: {{item}}</li>
+        </ul>
+        <h3 style="color: red">show object with (index,name,value)</h3>
+        <li v-for="(value, name, index) in object"> {{index}} : {{name}} = {{value}} </li>
+        
+        <h3 style="color: red">show object with table(value, name, index)</h3>
+        <table>
+            <tr>
+                <th v-for="(value, name, index) in object">{{name}}</th>
+            </tr>
+            <tr>
+                <td v-for="(value) in object">{{value}}</td>
+            </tr>
+        </table>
+
+        <h3 style="color: red">show object with table(value, name)</h3>
+        <table>
+            <tr>
+                <th v-for="(value, name) in object">{{name}}</th>
+            </tr>
+            <tr>
+                <td v-for="(value) in object">{{value}}</td>
+            </tr>
+        </table>
+        <hr>
+
+        <h2>Array</h2>
+        <h3>Array: {{itemList}}</h3>
+        <ul>
+            <li v-for="(item, index) in itemList">{{index}}:{{item}}</li>
+        </ul>
+
+        <h3 style="color: red">show with table</h3>
+        <table>
+            <tr>
+                <th v-for="(item,index) in itemList">{{index}}</th>
+            </tr>
+            <tr>
+                <td v-for="(item, index) in itemList">{{item}}</td>
+            </tr>
+        </table>
+        <hr>
+
+        <h2>Object Array</h2>
+        <h3>Object Array: {{objList}}</h3>
+        <h4 style="color: red">show basic info:</h4>
+        <ul>
+            <li v-for="item in objList" :key="item.id">{{item.id}} -> {{item.name}} -> {{item.age}}</li>
+        </ul>
+
+        <h4 style="color: red;">show with table</h4>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>age</th>
+            </tr>
+            <tr v-for="obj in objList">
+                <td>{{obj.id}}</td>
+                <td>{{obj.name}}</td>
+                <td>{{obj.age}}</td>
+            </tr>
+        </table>
+        <hr>
+
+        <h2>number</h2>
+        <span v-for="item in 10">{{item}} </span>
+        <hr>
+
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            object: {
+                id: 1,
+                name: 'Michale',
+                addr: 'USA'
+            },
+            itemList: ['Michale Jackson', 'Tylor Swift', 'Jackie Chen'],
+            objList: [
+                {id: 1, name: 'michale', age: 20},
+                {id: 2, name: 'tylor', age: 19},
+                {id: 3, name: 'jackie', age: 22}
+            ]
+        }
+    })
+</script>
+</html>
