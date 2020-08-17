@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>v-if</title>
+</head>
+<body>
+    <div class="desc" id="define">
+        <h2>Usage: </h2>
+        <p>Conditionally render the element based on the truthy-ness of the expression value. The element and its contained directives / components are destroyed and re-constructed during toggles. If the element is a <code>&lt;template&gt;</code> element, its content will be extracted as the conditional block.</p>
+        <hr>
+    </div>
+    <div class="demo" id="app">
+        <h1>v-if:</h1>
+        <p v-if="isShow">{{message}}</p>
+        <hr>
+
+        <h1>v-if & v-else:</h1>
+        <p v-if="isShow1">{{message}}</p>
+        <p v-else>This is v-else hidden message!</p>
+        <hr>
+
+        <h1>v-if & v-else-if</h1>
+        <p>Now show = {{isShow2}}</p>
+        <p v-if="isShow2 == 1">Equals to 1</p>
+        <p v-else-if="isShow2 > 1">Greater than 1</p>
+        <p v-else>less than 1</p>
+        <hr>
+
+    </div>   
+</body>
+    
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            isShow: 'true',
+            isShow1: 'false',
+            isShow2: 3,
+            message: 'This appears because of v-if is true, v-else will be hidden!'
+        }
+    })
+</script>
+</html>
