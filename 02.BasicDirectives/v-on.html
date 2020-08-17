@@ -13,8 +13,39 @@
         <p>Attaches an event listener to the element</p>
     </ul>
     <hr>
-    
+
     <div class="demo" id="app">
+        <h2>v-on counter</h2>
+        <button v-on:click="alert">Alert</button>
+        <hr>
+
+        <h2>v-on reverse message</h2>
+        <label for="">{{message}}</label>
+        <button v-on:click="reverse">Reverse Message</button>
+        <hr>
+
+        <h2>v-on check click times</h2>
+        <button v-on:click="counter">click</button>
+        <label for="">You have clicked {{count}} times.</label>
+
+        <h2>v-on without method</h2>
+        <button @click="newCount++">click</button>
+        <label for="">You have clicked {{newCount}} times.</label>
+        <hr>
+
+        <h2>v-on click once, only affect on counter at once</h2>
+        <button @click.once="onceCount++">click</button>
+        <label for="">You have clicked {{onceCount}} times.</label>
+        <hr>
+
+        <h2>v-on click combo</h2>
+        <button @click="comboCount--">-</button>
+        <label for="">{{comboCount}}</label>
+        <button @click="comboCount++">+</button>
+        <hr>
+
+        <h2>v-on bind key event</h2>
+        <input type="text" placeholder="press alt + c to active prompt" @keyup.alt.67="prompt">
 
     </div>
 </body>
@@ -23,10 +54,28 @@
     var vm = new Vue({
         el: '#app',
         data: {
-
+            message: 'Hello Vue',
+            count: 0,
+            newCount: 0,
+            onceCount: 0,
+            comboCount: 0,
         }, 
         methods: {
-
+            alert: function() {
+                alert("This is alert message!");
+            },
+            reverse: function() {
+                this.message = this.message.split('').reverse().join('');
+            },
+            counter: function() {
+                this.count++;
+            },
+            prompt: function() {
+                alert('You have entered alt+c key!');
+            },
+            ctrlPrompt: function() {
+                alert('You have entered ctrl + click key!');
+            }
         }
     })
 </script>
