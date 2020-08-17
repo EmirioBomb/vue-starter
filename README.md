@@ -11,3 +11,4 @@
 - [v-for](https://emiriobomb.github.io/vue-starter/02.BasicDirectives/v-for.html)
 - [v-bind](https://emiriobomb.github.io/vue-starter/02.BasicDirectives/v-bind.html)
 - [v-on](https://emiriobomb.github.io/vue-starter/02.BasicDirectives/v-on.html)
+- [v-model](https://emiriobomb.github.io/vue-starter/02.BasicDirectives/v-model.html)

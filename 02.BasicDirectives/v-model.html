@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>v-model</title>
+</head>
+<body>
+    <h2>v-model</h2>
+    <ul>
+        <li>Usages:</li>
+        <p>Create a two-way binding on a form input element or a component.</p>
+        <li>Limited to:</li>
+        <ul> 
+            <li>input</li>
+            <li>select</li>
+            <li>textarea</li>
+        </ul>
+    </ul>
+    <hr>
+
+    <div class="demo" id="app">
+        <h2>v-model text box</h2>
+        <input type="text" placeholder="input something" v-model="message">
+        <br>
+        <label for="">{{message}}</label>
+        <hr>
+
+        <h2>v-model textarea</h2>
+        <textarea name="" id="" cols="20" rows="5" v-model="msg"></textarea>
+        <br><span>You Typed:</span>
+        <p :style="stylish">{{msg}}</p>
+        <hr>
+
+        <h2>v-model bind to checkbox</h2>
+        <input type="checkbox" name="" id="" @click="checked ? false : true" v-model="checked">{{checked}}
+
+        <h2>v-model multi checkbox</h2>
+        <input type="checkbox" name="" id="" value="male" v-model="genderCheck">
+        <label for="">Male</label>
+        <input type="checkbox" name="" id="" value="female" v-model="genderCheck">
+        <label for="">Female</label>
+        <input type="checkbox" name="" id="" value="unknown" v-model="genderCheck">
+        <label for="">Unknown</label> <br>
+        <label for="">You checked: {{genderCheck}}</label>
+
+        <h2>v-model advanced checkbox </h2>
+        <input type="checkbox" name="" id="" v-model="toggle" true-value="yes" false-value="no">
+        <label for="">{{toggle}}</label>
+        <hr>
+
+        <h2>v-model radio box</h2>
+        <input type="radio" name="" id="" value='male' v-model="check">
+        <label for="">Male</label>
+        <input type="radio" name="" id="" value='female' v-model="check">
+        <label for="">Female</label> <br>
+        <label for="">You checked : {{check}}</label>
+
+        <h2>v-model advanced radio box</h2>
+        <input type="radio" name="" id="" v-model="toggleRadio" :value='true'>
+        <label for="">{{toggleRadio}}</label>
+        <hr>
+
+        <h2>v-model select option</h2>
+        <select name="" id="" v-model="country">
+            <option value="China">China</option>
+            <option value="USA">USA</option>
+            <option value="Japan">Japan</option>
+        </select> <br>
+        <label for="">You selected: {{country}}</label>
+
+        <h2>v-model multiple select option</h2>
+        <select name="" id="" multiple v-model="countryList" style="width: 55px">
+            <option value="China">China</option>
+            <option value="USA">USA</option>
+            <option value="Japan">Japan</option>
+        </select> <br>
+        <label for="">You selected: {{countryList}}</label>
+        <hr>
+
+        <h2>v-model & v-for dynamic render</h2>
+        <select name="" id="" v-model="opt">
+            <option v-for="option in options" :value="option.value">{{option.text}}</option>
+        </select> <br>
+        <label for="">You have selected: {{opt}}</label>
+        <hr>
+
+        <h2>v-model .lazy/.number/.trim/</h2>
+        <ul>
+            <li>.lazy -> please press enter button after typing</li>
+            <label for="">{{newMsg}}</label><br>
+            <input type="text" v-model.lazy="newMsg">
+
+            <li>.number -> cast valid input string to numbers</li>
+            <input type="number" v-model.lazy.number="age"><br>
+            <label for="">You typed: {{age}}</label> <br>
+            <label for="">typeof age: {{type}}</label> <br>
+
+            <li>.trim -> trim input</li>
+            <input type="text" v-model.trim="trimMessage"> <br>
+            <label for="">Trim message: {{trimMessage}}</label>
+        </ul>
+        <hr>
+
+        <h2>v-model small calculator</h2>
+        <input type="number" v-model.number="a">
+        <label for="">+</label>
+        <input type="number" v-model.number="b">
+        <label for="">=</label>
+        <label for="">{{total}}</label>
+        <hr>
+    </div>
+    
+</body>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            checked: true,
+            check: '',
+            genderCheck: [],
+            country: '',
+            countryList: [],
+            msg: '',
+            message: '',
+            newMsg: '',
+            stylish: {
+                whiteSpace: 'pre-line'
+            },
+            opt: '',
+            options: [
+                {text: 'One', value: "A"},
+                {text: 'Two', value: "B"},
+                {text: 'Three', value: "C"},
+            ],
+            toggle: '',
+            toggleRadio: '',
+            age: '',
+            type: '',
+            trimMessage: '',
+            a: '',
+            b: '',
+        },
+        methods: {
+            
+        },
+        watch: {
+            age: function() {
+                let isNumber = typeof(this.age);
+                if(isNumber == "number") {
+                    this.type = 'Number Type';
+                } else {
+                    this.type = 'Not Number Type';
+                }
+            }
+        },
+        computed: {
+            total: function() {
+                return this.a + this.b;
+            }
+        }
+    })
+</script>
+</html>
