@@ -1,7 +1,7 @@
 # vue-starter
 
 ### Getting Start
-> 1. Hello Vue Example
+> Hello Vue Example
 - Demo: [Hello Vue Example](https://emiriobomb.github.io/vue-starter/01.HelloVue/index.html)
 
 ### Basic Directives
@@ -12,3 +12,6 @@
 - [v-bind](https://emiriobomb.github.io/vue-starter/02.BasicDirectives/v-bind.html)
 - [v-on](https://emiriobomb.github.io/vue-starter/02.BasicDirectives/v-on.html)
 - [v-model](https://emiriobomb.github.io/vue-starter/02.BasicDirectives/v-model.html)
+
+> Vue Form Demo: 
+- Demo: [Vue Form Demo](https://emiriobomb.github.io/vue-starter/02.BasicDirectives/form-demo.html)
