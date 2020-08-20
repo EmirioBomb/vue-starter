@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="../vue.js"></script>
 
     <title>Form Data Operation</title>
@@ -50,7 +50,7 @@
         <div class="border border-success col-sm-5">
             <!-- do not remove @submit.prevent in form -->
             <!-- @submit.prevent prevent add button request a websocket and will refresh page -->
-            <form action="" class="col-sm-5  needs-validation" @submit.prevent>
+            <form action="" class="col-sm-12  needs-validation" @submit.prevent>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label" for="">ID: </label>
                     <div class="col-sm-10">
@@ -85,9 +85,14 @@
                     <button class="btn btn-primary" @click="add">Add User</button>
                 </div>
             </form>
-            <br>
-    
-            <table class="col-sm-5 table table-sm table-bordered table-hover table-striped text-center align-middle" >
+            <hr>
+
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+            </form>  
+
+            <table class="col-sm-12 table table-sm table-bordered table-hover table-striped text-center align-middle" >
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
