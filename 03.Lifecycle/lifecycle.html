@@ -215,12 +215,17 @@
 
 <script>
     Vue.config.productionTip = false;
+    console.log('%c%s', 'color: white; background-color: red', 'Application create vue instance in writing order.');
 
-    var vm = new Vue({
+
+    var vm0 = new Vue({
         el: '#outerHtml',
         data: {
             message: 'Hello message from <outer Html>'
         },
+        beforeCreate() {
+            console.log('%c%s', 'color: red; background-color: yellow', 'outerHtml app loaded!');
+        }
     });
 
     var vm1 = new Vue({
@@ -229,6 +234,9 @@
             message: 'Hello message from  outer Html',
         },
         template: '<h1>Hello message from &lt;vue-template&gt;</h1>',
+        beforeCreate() {
+            console.log('%c%s', 'color: red; background-color: yellow', 'vue-template app loaded!');
+        }
     });
 
     var vm2 = new Vue({
@@ -239,8 +247,11 @@
         render: function(createElement) {
             console.log('%c%s', 'color: red; background-color: yellow', 'Call render(createElement)!');
             return createElement('h1', 'Hello message from render(createElement)');
+        },
+        beforeCreate() {
+            console.log('%c%s', 'color: red; background-color: yellow', 'render(createElement) app loaded!');
         }
-    })
+    });
 
     var vm = new Vue({
         el: "#app",
@@ -248,7 +259,8 @@
             message: "Vue liefcycle message",
         },
         beforeCreate() {
-            console.group("******Vue app Start!******");
+            console.log('%c%s', 'color: red; background-color: yellow', 'vue-liefcycle app loaded!');
+            console.group("******Vue lifecycle Start!******");
             console.group("******Before Created Phase******");
             console.log("%c%s", "color:blue", "el      : " + this.$el);
             console.log(this.$el);
@@ -267,7 +279,6 @@
         beforeMount() {
             console.group("******Before Mounted Phase******");
             console.log("%c%s", "color:blue", "el      : " + this.$el);
-            // console.log(this.$el);
             console.log('%c%s', 'color: yellow; background-color: blue', 'el is not created yet, it\'s a virtual el');
             console.log('%c%s', 'color: red; background-color: yellow', 'vrt-el : ' + this.$el);
             console.log("%c%s", "color:blue", "data    : " + this.$data);
@@ -308,6 +319,7 @@
             console.log("%c%s", "color:blue", "data    : " + this.$data);
             console.log("%c%s", "color:blue", "message : " + this.message);
         },
-    }) 
+    });
+     
 </script>
 </html>
