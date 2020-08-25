@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- syntax highlight -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/themes/prism-okaidia.css" rel="stylesheet" />
+
+    <style>
+        code {
+            position: relative;
+            left: -8rem;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="../vue.js"></script>
+    <title>Vue lifecycle</title>
+</head>
+<body>
+    <!-- vue lifecycle -->
+    <div class="lifecycle" id="app">
+        <hr>
+        <h1>{{message}}</h1>
+        <h3>Please check console with dev-tools or press F12 in chrome</h3>
+    </div>
+    
+    <div class="code-part">
+        <h3>1. html</h3>
+        <pre class="language-markup">
+            <code class="language-markup">
+                &lt;div class="lifecycle" id="app">
+                    &lt;p>{{message}}&lt;/p>
+                &lt;/div>
+            </code>
+        </pre>
+
+        <h3>2. js</h3>
+        <pre class="language-javascript">
+            <code class="language-javascript">
+                var vm = new Vue({
+                    el: "#app",
+                    data: {
+                        message: "Outer Message",
+                    },
+                    beforeCreate() {
+                        console.group("******Vue app Start!******");
+                        console.group("******Before Created Phase******");
+                        console.log("%c%s", "color:blue", "el      : " + this.$el);
+                        console.log(this.$el);
+                        console.log("%c%s", "color:blue", "data    : " + this.$data);
+                        console.log("%c%s", "color:blue", "message : " + this.message);
+                        
+                        console.dir(this.obj);
+                    },
+                    created() {
+                        console.group("******Created Phase******");
+                        console.log("%c%s", "color:blue", "el      : " + this.$el);
+                        console.log(this.$el);
+                        console.log("%c%s", "color:blue", "data    : " + this.$data);
+                        console.log("%c%s", "color:blue", "message : " + this.message);
+                    },
+                    beforeMount() {
+                        console.group("******Before Mounted Phase******");
+                        console.log("%c%s", "color:blue", "el      : " + this.$el);
+                        console.log('%c%s', 'color: yellow; background-color: blue', 'el is not created yet, it\'s a virtual el');
+                        console.log('%c%s', 'color: red; background-color: yellow', 'vrt-el : ' + this.$el);
+                        console.log("%c%s", "color:blue", "data    : " + this.$data);
+                        console.log("%c%s", "color:blue", "message : " + this.message);
+                    },
+                    mounted() {
+                        console.group("******=Mounted Phase******");
+                        console.log("%c%s", "color:blue", "el      : " + this.$el);
+                        console.log(this.$el);
+                        console.log("%c%s", "color:blue", "data    : " + this.$data);
+                        console.log("%c%s", "color:blue", "message : " + this.message);
+                    },
+                    beforeUpdate() {
+                        console.group("******Before Updated Phase******");
+                        console.log("%c%s", "color:blue", "el      : " + this.$el);
+                        console.log(this.$el);
+                        console.log("%c%s", "color:blue", "data    : " + this.$data);
+                        console.log("%c%s", "color:blue", "message : " + this.message);
+                    },
+                    updated() {
+                        console.group("******Update Phase******");
+                        console.log("%c%s", "color:blue", "el      : " + this.$el);
+                        console.log(this.$el);
+                        console.log("%c%s", "color:blue", "data    : " + this.$data);
+                        console.log("%c%s", "color:blue", "message : " + this.message);
+                    },
+                    beforeDestroy() {
+                        console.group("******Before Destroyed Phase******");
+                        console.log("%c%s", "color:blue", "el      : " + this.$el);
+                        console.log(this.$el);
+                        console.log("%c%s", "color:blue", "data    : " + this.$data);
+                        console.log("%c%s", "color:blue", "message : " + this.message);
+                    },
+                    destroyed() {
+                        console.group("******Destroy Phase******");
+                        console.log("%c%s", "color:blue", "el      : " + this.$el);
+                        console.log(this.$el);
+                        console.log("%c%s", "color:blue", "data    : " + this.$data);
+                        console.log("%c%s", "color:blue", "message : " + this.message);
+                    },
+                }) 
+            </code>
+        </pre>
+    </div>
+    <hr>
+
+    <!-- vue render -->
+    <div class="header-info">
+        <h1>Render priority => render(createElement) > template > outerHtml</h1>
+        <ol>
+            <li><a href="#outerHtml">Render with OuterHtml</a></li>
+            <li><a href="#template">Render with vue-template</a></li>
+            <li><a href="#renderFunc">Render with render(createElement)</a></li>
+        </ol>
+    </div>
+    <hr>
+
+    <!-- outerHtml code part-->
+    <div class="outerHtml" id="outerHtml">
+        <h1>{{message}}</h1>
+    </div>
+    <div class="code-part">
+        <h3>1. html</h3>
+        <pre class="language-markup">
+            <code class="language-markup">
+                &lt;div class="outerHtml" id="outerHtml">
+                    &lt;p>{{message}}&lt;/p>
+                &lt;/div>
+            </code>
+        </pre>
+
+        <h3>2. js</h3>
+        <pre class="language-javascript">
+            <code class="language-javascript">
+                var vm = new Vue({
+                    el: '#outerHtml',
+                    data: {
+                        message: 'Hello message from <outer Html>'
+                    }
+                });
+            </code>
+        </pre>
+    </div>
+    <hr>
+
+    <!-- vue-template code part -->
+    <p id="template"></p>
+    <div class="vue-template" id="vue-template">
+        <h1>{{message}}</h1>
+    </div>
+    <div class="code-part">
+        <h3>1. html</h3>
+        <pre class="language-markup">
+            <code class="language-markup">
+                &lt;div class="vue-template" id="vue-template">
+                    &lt;p>{{message}}&lt;/p>
+                &lt;/div>
+            </code>
+        </pre>
+
+        <h3>2. js</h3>
+        <pre class="language-javascript">
+            <code class="language-javascript">
+                var vm1 = new Vue({
+                    el: '#vue-template',
+                    data: {
+                        message: 'Hello message from  outer Html',
+                    },
+                    template: '&lt;h1>Hello message from &lt;vue-template&gt;&lt;/h1>',
+                });
+            </code>
+        </pre>
+    </div>
+    <hr>
+
+    <p id="renderFunc"></p>
+    <div class="render" id="render">
+        <p>{{message}}</p>
+    </div>
+    <!-- render code part -->
+    <div class="code-part">
+        <h3>1. html</h3>
+        <pre class="language-markup">
+            <code class="language-markup">
+                &lt;div class="render" id="render">
+                    &lt;p>{{message}}&lt;/p>
+                &lt;/div>
+            </code>
+        </pre>
+
+        <h3>2. js</h3>
+        <pre class="language-javascript">
+            <code class="language-javascript">
+                var vm2 = new Vue({
+                    el: '#render',
+                    data: {
+                        message: 'Hello message from vue-template',
+                    },
+                    render: function(createElement) {
+                        console.log('%c%s', 'color: red; background-color: yellow', 'Call render(createElement)!');
+                        return createElement('h1', 'Hello message from render(createElement)');
+                    }
+                })
+            </code>
+        </pre>
+    </div>
+   
+</body>
+
+<script>
+    Vue.config.productionTip = false;
+
+    var vm = new Vue({
+        el: '#outerHtml',
+        data: {
+            message: 'Hello message from <outer Html>'
+        },
+    });
+
+    var vm1 = new Vue({
+        el: '#vue-template',
+        data: {
+            message: 'Hello message from  outer Html',
+        },
+        template: '<h1>Hello message from &lt;vue-template&gt;</h1>',
+    });
+
+    var vm2 = new Vue({
+        el: '#render',
+        data: {
+            message: 'Hello message from vue-template',
+        },
+        render: function(createElement) {
+            console.log('%c%s', 'color: red; background-color: yellow', 'Call render(createElement)!');
+            return createElement('h1', 'Hello message from render(createElement)');
+        }
+    })
+
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            message: "Vue liefcycle message",
+        },
+        beforeCreate() {
+            console.group("******Vue app Start!******");
+            console.group("******Before Created Phase******");
+            console.log("%c%s", "color:blue", "el      : " + this.$el);
+            console.log(this.$el);
+            console.log("%c%s", "color:blue", "data    : " + this.$data);
+            console.log("%c%s", "color:blue", "message : " + this.message);
+            
+            console.dir(this.obj);
+        },
+        created() {
+            console.group("******Created Phase******");
+            console.log("%c%s", "color:blue", "el      : " + this.$el);
+            console.log(this.$el);
+            console.log("%c%s", "color:blue", "data    : " + this.$data);
+            console.log("%c%s", "color:blue", "message : " + this.message);
+        },
+        beforeMount() {
+            console.group("******Before Mounted Phase******");
+            console.log("%c%s", "color:blue", "el      : " + this.$el);
+            // console.log(this.$el);
+            console.log('%c%s', 'color: yellow; background-color: blue', 'el is not created yet, it\'s a virtual el');
+            console.log('%c%s', 'color: red; background-color: yellow', 'vrt-el : ' + this.$el);
+            console.log("%c%s", "color:blue", "data    : " + this.$data);
+            console.log("%c%s", "color:blue", "message : " + this.message);
+        },
+        mounted() {
+            console.group("******=Mounted Phase******");
+            console.log("%c%s", "color:blue", "el      : " + this.$el);
+            console.log(this.$el);
+            console.log("%c%s", "color:blue", "data    : " + this.$data);
+            console.log("%c%s", "color:blue", "message : " + this.message);
+        },
+        beforeUpdate() {
+            console.group("******Before Updated Phase******");
+            console.log("%c%s", "color:blue", "el      : " + this.$el);
+            console.log(this.$el);
+            console.log("%c%s", "color:blue", "data    : " + this.$data);
+            console.log("%c%s", "color:blue", "message : " + this.message);
+        },
+        updated() {
+            console.group("******Update Phase******");
+            console.log("%c%s", "color:blue", "el      : " + this.$el);
+            console.log(this.$el);
+            console.log("%c%s", "color:blue", "data    : " + this.$data);
+            console.log("%c%s", "color:blue", "message : " + this.message);
+        },
+        beforeDestroy() {
+            console.group("******Before Destroyed Phase******");
+            console.log("%c%s", "color:blue", "el      : " + this.$el);
+            console.log(this.$el);
+            console.log("%c%s", "color:blue", "data    : " + this.$data);
+            console.log("%c%s", "color:blue", "message : " + this.message);
+        },
+        destroyed() {
+            console.group("******Destroy Phase******");
+            console.log("%c%s", "color:blue", "el      : " + this.$el);
+            console.log(this.$el);
+            console.log("%c%s", "color:blue", "data    : " + this.$data);
+            console.log("%c%s", "color:blue", "message : " + this.message);
+        },
+    }) 
+</script>
+</html>
