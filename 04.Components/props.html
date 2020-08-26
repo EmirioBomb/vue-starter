@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>Vue-props</title>
+</head>
+<body>
+    <!-- props component -->
+
+    <div class="demo" id="propsComponent">
+        <hr>
+        <props-component title="The first title"></props-component>
+        <props-component title="The second title"></props-component>
+        <props-component title="The third title"></props-component>
+    </div>
+    <hr>
+
+    <!-- props coponent template -->
+    <template id="blog">
+        <div class="blog-post">
+            <p>##########################</p>
+            <button @click="$emit('increase')">Increase Font</button>
+            <button @click="$emit('decrease')">Decrease Font</button>
+            <button @click="$emit('enlarge', 0.1)">Enlarge Font</button>
+            <button @click="$emit('reduce', 0.1)">Reduce Font</button>
+            <button @click="$emit('plus')"> + </button>
+            <button @click="$emit('minus')"> - </button>
+            <h4>ID      : {{post.id}}</h4>
+            <h4>TITLE   : {{post.title}}</h4>
+            <h4>DATE    : {{post.date}}</h4>
+            <h4>CONTENT  : {{post.content}}</h4>
+        </div>
+    </template>
+
+    <div class="demo" id="blogPosts">
+        <!-- $emit('eventName', value) => $event -->
+        <blog-post v-for="post in posts" :key="post.id" :post="post" :style="{fontSize: blogFontSize + 'rem'}" 
+            @increase="blogFontSize += 0.1" 
+            @decrease="blogFontSize -= 0.1"
+            @enlarge="blogFontSize += $event"
+            @reduce="blogFontSize -= $event"
+            @plus="plus(0.1)"
+            @minus="minus(0.1)"
+        ></blog-post>
+    </div>
+    <hr>
+    
+</body>
+
+<script>
+    Vue.config.productionTip = false;
+
+    // register global props component
+    Vue.component('props-component', {
+        props:['title'],
+        template:
+            `
+                <h2>{{title}}</h2>
+            `
+    });
+
+    var propsComp = new Vue({
+        el: '#propsComponent',
+    });
+
+    // blog posts
+    var blogPost = Vue.component('blog-post', {
+        props: ['post'],
+        template: '#blog'
+    });
+
+    var blogComp = new Vue({
+        el: '#blogPosts',
+        data: {
+            posts: [
+                {id: 1, title: 'earned', date: '2020-9-8', content: 'I earned $1000 in one hour.'},
+                {id: 2, title: 'cost', date: '2021-9-10', content: 'I cost $100 in a second.'},
+                {id: 3, title: 'nothing', date: '2022-1-10', content: 'nothing happened.'},
+            ],
+            blogFontSize: 1,
+        },
+        component: {
+            'blog-post': blogPost
+        },
+        methods: {
+            plus: function(fontSize) {
+                this.blogFontSize += fontSize;
+            },
+            minus: function(fontSize) {
+                this.blogFontSize -= fontSize;
+            }
+        }
+    })
+</script>
+</html>
