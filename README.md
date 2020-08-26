@@ -19,3 +19,6 @@
 ### Vue Lifecycle
 > Vue lifecycle Demo:
 - Demo: [Vue lifecycle](https://emiriobomb.github.io/vue-starter/03.Lifecycle/lifecycle.html)
+
+### Vue Component
+- [component-registration](https://emiriobomb.github.io/vue-starter/04.Components/component-registration.html)

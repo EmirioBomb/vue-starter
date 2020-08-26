@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>Basic Componnent</title>
+</head>
+<body>
+    <!-- navigation -->
+    <div class="navi" id="navi">
+        <hr>
+        <h2>Navigation</h2>
+        <link-component></link-component>
+    </div>
+    <hr>
+
+    <!-- basic-component -->
+    <div class="demo" id="myComponent">
+        <h3>>myComponent</h3>
+        <my-component></my-component>
+    </div>
+    <hr>
+
+    <!-- local-component -->
+    <div class="demo1" id="localComponent">
+        <h3>>localComponent</h3>
+        <my-component></my-component>
+        <local-component></local-component>
+    </div>
+    <hr>
+
+    <!-- parent-child component -->
+    <div class="demo2" id="parentComponent">
+        <h3>>parentComponent</h3>
+        <parent-component></parent-component>
+    </div>
+    <hr>
+
+    <!-- template component -->
+    <template class="demo3" id="template">
+        <h2>This is template component!</h2>
+    </template>
+
+    <div class="demo3" id="templateComponent">
+        <h3>>templateComponent</h3>
+        <template-component></template-component>
+    </div>
+    <hr>
+
+    <!-- independent component -->
+    <div class="demo4" id="countComponent">
+        <h3>>countComponent</h3>
+        <count-component></count-component>
+        <count-component></count-component>
+        <count-component></count-component>
+    </div>
+    <hr>
+
+    <!-- syncronized component -->
+    <div class="demo5" id="syncComponent">
+        <h3>>syncComponent</h3>
+        <sync-component></sync-component>
+        <sync-component></sync-component>
+        <sync-component></sync-component>
+    </div>
+    <hr>
+
+</body>
+
+<script>
+    Vue.config.productionTip = false;
+
+    // navi component    
+    Vue.component('link-component', {
+        data: function() {
+            return {
+                links: [
+                    'myComponent', 
+                    'localComponent', 
+                    'parentComponent', 
+                    'templateComponent', 
+                    'countComponent', 
+                    'syncComponent', 
+                ],
+            }
+        },
+        template: `<div><ol><li v-for="(link, index) in links" :key="index"><a :href="'#' + link">{{link}}</a></li></ol></div>`,
+    });
+
+    var navi = new Vue({
+        el: '#navi',
+    })
+
+
+    // vue constructor
+    var myComponent = Vue.extend({
+        template: '<h2>My component template message!</h2>',
+    });
+
+    // use as local resgistration
+    var localComponent = Vue.extend({
+        template: 
+            `
+                <h3>This is scope component</h3>
+            `
+    })
+
+    // component global registration
+    Vue.component('my-component', myComponent);
+
+    // create vue instance
+    var vm = new Vue({
+        el: '#myComponent'
+    });
+
+    var vm1 = new Vue({
+        el: '#localComponent' ,
+        components: {
+            'local-component': localComponent,
+        }
+    });
+
+    // parent-child component
+    var childComponent = Vue.extend({
+        template: 
+            `
+                <h3>This is child component!</h3>
+            `
+    });
+
+    var parentComponent = Vue.extend({
+        // component template should contain exactly one root element
+        // <p> & <child-component> must be included in a root element, or error occurred
+        template:
+        `
+            <div>
+                <h2>This is parent component!</h2>
+                <child-component></child-component>
+            </div>
+        `,
+        components: {
+            'child-component': childComponent,
+        },
+    });
+
+    // register parent component
+    Vue.component('parent-component', parentComponent);
+
+    var vm2 = new Vue({
+        el: '#parentComponent',
+    });
+
+    // register template component
+    Vue.component('template-component', {
+        template: '#template'
+    });
+
+    var template = new Vue({
+        el: '#templateComponent',
+    })
+
+    // register count component with data function
+    var countComponent = Vue.component('count-component', {
+        data() {
+            return {
+                counter: 0,
+            }
+        },
+        template:
+            `
+                <button @click="counter++">You have clicked {{counter}} times.</button>
+            `
+    });
+
+    var countComp = new Vue({
+        el: '#countComponent',
+        components: {
+            'count-component': countComponent,
+        }
+    })
+
+    // register sync counter component
+    var count = {
+        counter: 0
+    }
+    var syncComponent = Vue.component('sync-component', {
+        data() {
+            return count;
+        },
+        template: 
+            `
+             <button @click="counter++">You have clicked {{counter}} times.</button>
+            `
+    })
+
+    var syncComp = new Vue({
+        el: '#syncComponent',
+        components: {
+            'sync-component': syncComponent
+        }
+    })
+
+    
+
+    
+</script>
+</html>
