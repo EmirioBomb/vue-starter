@@ -5,20 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- syntax highlight -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/themes/prism.css">
     <link href="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/themes/prism-okaidia.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/line-numbers/prism-line-numbers.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/toolbar/prism-toolbar.css">
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <style>
-        code {
+        /* code {
             position: relative;
             left: -8rem;
-        }
+        } */
     </style>
+    
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/components.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/toolbar/prism-toolbar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/show-language/prism-show-language.min.js"></script>
+    
     <script src="../vue.js"></script>
     <title>Vue lifecycle</title>
 </head>
-<body>
+<body class="line-numbers">
     <!-- vue lifecycle -->
     <div class="lifecycle" id="app">
         <hr>
@@ -28,8 +41,8 @@
     
     <div class="code-part">
         <h3>1. html</h3>
-        <pre class="language-markup">
-            <code class="language-markup">
+        <pre class="language-html">
+            <code class="language-html">
                 &lt;div class="lifecycle" id="app">
                     &lt;p>{{message}}&lt;/p>
                 &lt;/div>
@@ -37,7 +50,7 @@
         </pre>
 
         <h3>2. js</h3>
-        <pre class="language-javascript">
+        <pre class="language-javascript" data-src-status="loaded">
             <code class="language-javascript">
                 var vm = new Vue({
                     el: "#app",
@@ -127,8 +140,8 @@
     </div>
     <div class="code-part">
         <h3>1. html</h3>
-        <pre class="language-markup">
-            <code class="language-markup">
+        <pre class="language-html">
+            <code class="language-html">
                 &lt;div class="outerHtml" id="outerHtml">
                     &lt;p>{{message}}&lt;/p>
                 &lt;/div>
@@ -156,8 +169,8 @@
     </div>
     <div class="code-part">
         <h3>1. html</h3>
-        <pre class="language-markup">
-            <code class="language-markup">
+        <pre class="language-html">
+            <code class="language-html">
                 &lt;div class="vue-template" id="vue-template">
                     &lt;p>{{message}}&lt;/p>
                 &lt;/div>
@@ -186,8 +199,8 @@
     <!-- render code part -->
     <div class="code-part">
         <h3>1. html</h3>
-        <pre class="language-markup">
-            <code class="language-markup">
+        <pre class="language-html">
+            <code class="language-html">
                 &lt;div class="render" id="render">
                     &lt;p>{{message}}&lt;/p>
                 &lt;/div>
