@@ -23,3 +23,6 @@
 ### Vue Component
 - [component-registration](https://emiriobomb.github.io/vue-starter/04.Components/component-registration.html)
 - [component-props](https://emiriobomb.github.io/vue-starter/04.Components/component-props.html)
+
+### Vue Cookbook
+- [instance-property](https://emiriobomb.github.io/vue-starter/05.cookbook/instance-property.html)

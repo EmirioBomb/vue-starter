@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- import prism.css -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/themes/prism-okaidia.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/line-numbers/prism-line-numbers.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/toolbar/prism-toolbar.css">
+
+    <!-- import prism.js -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/toolbar/prism-toolbar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/plugins/show-language/prism-show-language.min.js"></script>
+
+    <!-- import axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.js"></script>
+
+    <!-- import vue.js -->
+    <script src="../vue.js"></script>
+
+    <title>Adding Instance Property</title>
+</head>
+<body>
+    <!-- navi -->
+    <div class="navi" id="navigation">
+        <prototype-comp></prototype-comp>
+    </div>
+
+    <!-- $appName vs appName -->
+    <div class="demo" id="app">
+        <h4>1. $appName VS appName (check dev-tool's console. F12 on Chrome)</h4>
+        <!-- js code -->
+        <pre class="language-javascript line-numbers">
+            <code class="language-javascript">
+                Vue.prototype.appName = 'My New App';
+                Vue.prototype.$appTmp = 'My Temp App';
+
+                var vue = new Vue({
+                    el: '#app',
+                    data: {
+                        appName: "App",
+                        appTmp: 'Temp App'
+                    },
+                    beforeCreate() {
+                        console.log("%c%s", "color: red", "[beforeCreate] this.appName = " +this.appName);
+                        console.log("%c%s", "color: blue", "[beforeCreate] this.appTmp = " +this.appTmp);
+                    },
+                    created() {
+                        console.log("%c%s", "color: red", "[created] this.appName = " + this.appName);
+                        console.log("%c%s", "color: blue", "[created] this.appTmp = " + this.appTmp);
+                    }
+                })
+            </code>
+        </pre>
+
+        <!-- results -->
+        <h5>1.1 Result</h5>
+        <pre class="language-text line-numbers">
+            <code class="language-text line-numbers">
+                [beforeCreate] this.appName = My New App
+                [beforeCreate] this.appTmp = undefined
+                [created] this.appName = App
+                [created] this.appTmp = Temp App
+            </code>
+        </pre>
+
+    </div>
+
+    <!-- axios annonymous -->
+    <div class="axios-demo" id="axios">
+        <h4>2. Vue.prototype.$http = axios</h4>
+        <pre class="language-JavaScript line-numbers">
+            <code class="language-JavaScript line-numbers">
+                Vue.prototype.$http = axios;
+
+                var axiosVue = new Vue({
+                    el: '#axios',
+                    data: {
+                        users: []
+                    },
+                    created() {
+                        var vm = this
+                        this.$http
+                            .get('https://jsonplaceholder.typicode.com/users')
+                            .then((response) => {
+                                vm.users = response.data;
+                            })
+                    }
+                })
+            </code>
+        </pre>
+
+
+        <!-- vue-for -->
+        <!-- <ul>
+            <li v-for="user in users" :key="user.id">{{user.name}}</li>
+        </ul> -->
+
+        <!-- results -->
+        <h4>2.1 Result</h4>
+        <pre class="language-markup">
+            <code class="">
+                    <li v-for="user in users" :key="user.id">{{user.name}}</li>
+            </code>
+        </pre>
+    </div>
+
+    <hr>
+    <!-- prototype context -->
+    <div class="prototype" id="prototype">
+        <h2>3. Vue.prototype.$function = function(args...){...}</h2>
+        <pre class="language-javascript line-numbers">
+            <code class="language-javascript line-numbers">
+                Vue.prototype.$reverseText = function(protoText) {
+                    this[protoText] = this[protoText]
+                                        .split('')
+                                        .reverse()
+                                        .join('');
+                }
+            
+                var protoVue = new Vue({
+                    el: '#prototype',
+                    data: {
+                        context: 'Hello'
+                    },
+                    created() {
+                        console.log(this.context);
+                        this.$reverseText('context');
+                        console.log(this.context);
+                    },
+                })
+            </code>
+        </pre>
+        <h4>3.1 Result</h4>
+        <pre class="language-markup">
+            <code class="language-markup">
+                <h3>{{context}}</h3>
+            </code>
+        </pre>
+    </div>
+</body>
+
+<script>
+    Vue.config.productionTip = false;
+
+    // navigation
+    var naviVue = new Vue({
+        el: '#navigation',
+        components: {
+            'prototype-comp': {
+                data() {
+                    return {
+                        navilist: ['app', 'axios', 'prototype']
+                    }
+                },
+                template: `
+                    <div class="navi-head">
+                        <ul>
+                            <li v-for="navi in navilist"><a :href='"#" + navi'>{{navi}}</a></li>
+                        </ul>
+                    </div>
+                `
+            }
+        }
+    })
+    
+    // appName
+    Vue.prototype.appName = 'My New App';
+    Vue.prototype.$appTmp = 'My Temp App';
+
+    var vue = new Vue({
+        el: '#app',
+        data: {
+            appName: "App",
+            appTmp: 'Temp App'
+        },
+        beforeCreate() {
+            console.log("%c%s", "color: red", "[beforeCreate] this.appName = " +this.appName);
+            console.log("%c%s", "color: blue", "[beforeCreate] this.appTmp = " +this.appTmp);
+        },
+        created() {
+            console.log("%c%s", "color: red", "[created] this.appName = " + this.appName);
+            console.log("%c%s", "color: blue", "[created] this.appTmp = " + this.appTmp);
+        }
+    });
+
+
+    // axios
+    Vue.prototype.$http = axios;
+
+    var axiosVue = new Vue({
+        el: '#axios',
+        data: {
+            users: [],
+        },
+        created() {
+            var vm = this;
+            this.$http
+                .get('https://jsonplaceholder.typicode.com/users')
+                .then((response) => {
+                    vm.users = response.data;
+                });
+        }
+    })
+
+    // prototype context
+    Vue.prototype.$reverseText = function(protoText) {
+        this[protoText] = this[protoText]
+                            .split('')
+                            .reverse()
+                            .join('');
+    }
+
+    var protoVue = new Vue({
+        el: '#prototype',
+        data: {
+            context: 'Hello'
+        },
+        created() {
+            console.log(this.context);
+            this.$reverseText('context');
+            console.log(this.context);
+        },
+    })
+</script>
+</html>
