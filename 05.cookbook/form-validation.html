@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        label {
+            float: left;
+            width: 5%;
+        }
+    </style>
+    <script src="../vue.js"></script>
+    <title>Vue Form-Validataion</title>
+</head>
+<body>
+    <div class="form-validation" id="app">
+        <form-validation></form-validation>
+    </div>
+
+    
+</body>
+
+<script>
+    Vue.config.productionTip = false;
+
+    Vue.component('form-validation', {
+        data() {
+            return {
+                user: {
+                    name: '',
+                    password: ''
+                },
+                isValidPassword: false,
+                isValidName: false,
+                validation: {
+                    color: 'red',
+                    fontWeight: 'bold',
+                    fontSize: '15px'
+                }
+            }
+        },
+        methods: {
+            checkForm(event) {
+                this.user.name == "" ? (this.isValidName = true) : (this.isValidName = false);
+                this.user.password == "" ? (this.isValidPassword = true) : (this.isValidPassword = false);
+                if(!this.isValidName && !this.isValidPassword) {
+                    return true;
+                }
+                event.preventDefault();
+            }
+        },
+        template: `
+            <form 
+                id="app"
+                action="https://jsonplaceholder.typicode.com/users" 
+                @submit="checkForm"
+                method="post"
+                novalidate="true">
+
+                <p>
+                <label for="">Name: </label>
+                <input type="text" name="name" v-model="user.name"><br>
+                <p :style="validation" v-show="isValidName">Name can't be empty!</p>
+                </p>
+
+                <p>
+                <label for="">Password: </label>
+                <input type="text" name="password" v-model="user.password"><br>
+                <p :style="validation" v-show="isValidPassword">Password can't be empty!</p>
+                </p>
+                <input type="submit" value="Submit">
+            </form>
+
+        `
+    })
+
+    var formVue = new Vue({
+        el: '#app',
+    })
+</script>
+</html>

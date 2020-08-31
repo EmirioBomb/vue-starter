@@ -26,3 +26,4 @@
 
 ### Vue Cookbook
 - [instance-property](https://emiriobomb.github.io/vue-starter/05.cookbook/instance-property.html)
+- [form-validation](https://emiriobomb.github.io/vue-starter/05.cookbook/form-validation.html)
